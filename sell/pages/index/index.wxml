@@ -1,0 +1,52 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="header">
+    <view class="content-wrapper">
+      <view class="avatar">
+        <image src="{{seller.avatar}}"  mode="scaleToFill"></image>
+      </view>
+      <view class="content">
+        <view class="title">
+          <image class="brand" src="../../img/brand@{{flag ? 2 : 3}}x.png"  mode="scaleToFill"></image>
+          <text class="name">{{seller.name}}</text>
+        </view>
+        <view class="desciription">
+          {{seller.description}}/{{seller.deliveryTime}}分钟送达
+        </view>
+        <view class="support">
+          <block wx:for="{{seller.supports}}" wx:key="*this" >
+            <image wx:if="{{seller.supports[0].type == index}}" src="../../img/{{imglist[0]}}@{{flag ? 2 : 3}}x.png"></image>
+            <!--
+            <image wx:if="{{seller.supports[0].type == 0}}" src="../../img/decrease_1@{{flag ? 2 : 3}}x.png"></image>
+            <image wx:if="{{seller.supports[0].type == 1}}" src="../../img/discount_1@{{flag ? 2 : 3}}x.png"></image>
+            <image wx:if="{{seller.supports[0].type == 2}}" src="../../img/guarantee_1@{{flag ? 2 : 3}}x.png"></image>
+            <image wx:if="{{seller.supports[0].type == 3}}" src="../../img/decrease_1@{{flag ? 2 : 3}}x.png"></image>
+            <image wx:if="{{seller.supports[0].type == 4}}" src="../../img/invoice_1@{{flag ? 2 : 3}}x.png"></image>
+            -->
+          </block>
+          <text class="text">{{seller.supports[0].description}}</text>
+        </view>
+      </view>
+      <view class="support-count" wx:if="{{seller.supports}}">
+        <text class="count">{{seller.supports.length}}个</text>
+        <text class="iconfont icon-keyboardarrowright"></text>
+      </view>
+    </view>
+    <view class="bulletin-wrapper">
+      <image class="bulletin-title" src="../../img/bulletin@{{flag ? 2 : 3}}x.png" mode="scaleToFill"></image>
+      <text class="bulletin-text">{{seller.bulletin}}</text>
+      <text class="iconfont icon-keyboardarrowright"></text>
+    </view>
+    <view class="background">
+      <image src="{{seller.avatar}}" mode="scaleToFill" style="width:100%;height:100%"></image>
+    </view>
+  </view>
+  <view class="goods">
+    <view class="menu-wrapper">
+         
+    </view>
+    <view class="foods-wrapper">
+      
+    </view>
+  </view>
+</view>
