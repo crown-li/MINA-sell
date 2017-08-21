@@ -14,7 +14,7 @@
           {{seller.description}}/{{seller.deliveryTime}}分钟送达
         </view>
         <view class="support">
-          <block wx:for="{{seller.supports}}" wx:key="*this" >
+          <block wx:for="{{seller.supports}}" wx:key="type" >
             <image wx:if="{{seller.supports[0].type == index}}" src="../../img/{{imglist[0]}}@{{flag ? 2 : 3}}x.png"></image>
             <!--
             <image wx:if="{{seller.supports[0].type == 0}}" src="../../img/decrease_1@{{flag ? 2 : 3}}x.png"></image>
@@ -41,12 +41,53 @@
       <image src="{{seller.avatar}}" mode="scaleToFill" style="width:100%;height:100%"></image>
     </view>
   </view>
-  <view class="goods">
-    <view class="menu-wrapper">
-         
-    </view>
-    <view class="foods-wrapper">
-      
-    </view>
+  <view class="tab">
+    <view bindtap="swichNav" data-current="0">商品</view>
+    <view bindtap="swichNav" data-current="1">评价</view>
+    <view bindtap="swichNav" data-current="2">商家</view>
   </view>
+  <swiper class="goodsSwiper" style="height:{{winHeight - 174 - 46}}px" current="{{currentTab}}" bindchange="bindChange">
+    <swiper-item class="swiper-item-1">
+      <view class="goods">
+        <scroll-view class="menu-wrapper" scroll-y  style="height:{{winHeight - 174 - 46}}px">
+          <view class="menu-item" wx:for="{{goods}}" bindtap="selectMenu" data-index="{{index}}" wx:key="*this">
+            <view class="text">
+              <image class="icon" src="../../img/{{imglist2[item.type]}}_3@{{flag ? 2 : 3}}x.png" wx:if="{{item.type > 0}}"></image>
+              {{item.name}}
+            </view>
+          </view>
+        </scroll-view>
+        <scroll-view class="foods-wrapper" scroll-y scroll-with-animation scroll-into-view="{{viewTo}}"  style="height:{{winHeight - 174 - 46}}px">
+          <view class="food-list" wx:for="{{goods}}" id="index{{index}}"  wx:key="*this">
+            <text class="title">{{item.name}}</text>
+            <view class="">
+              <view class="food-item" wx:for="{{item.foods}}" wx:for-item="foods" wx:key="name">
+                <view class="icon">
+                  <image src="{{foods.icon}}"></image>
+                </view>
+                <view class="content">
+                  <text class="name">{{foods.name}}</text>
+                  <text class="desc">{{foods.description}}</text>
+                  <view class="extra">
+                    <text class="count">月售{{foods.sellCount}}份</text>
+                    <text class="rate">好评率{{foods.rating}}%</text>
+                  </view>
+                  <view class="price">
+                    <text class="now">￥{{foods.price}}</text>
+                    <text class="old" wx:if="{{foods.oldPrice}}">￥{{foods.oldPrice}}</text>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </scroll-view>
+      </view>
+    </swiper-item>
+    <swiper-item>
+      ratings
+    </swiper-item>
+    <swiper-item>
+      seller
+    </swiper-item>
+  </swiper>
 </view>
